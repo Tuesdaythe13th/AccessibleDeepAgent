@@ -21,7 +21,7 @@
 
 ## 📣 Latest News
 
-<!-- - **[October 29, 2025]**: The brief introduction of DeepAgent can be found on platforms like **[X](https://x.com/hasantoxr/status/1983262428826894430)** and **[WeChat](https://mp.weixin.qq.com/s/ZXwMwuB8fBStJORj4tYI2g)**. -->
+<!-- - **[October 29, 2025]**: The brief introduction of DeepAgent can be found on official platforms like **[X](https://x.com/hasantoxr/status/1983262428826894430)** and **[WeChat](https://mp.weixin.qq.com/s/ZXwMwuB8fBStJORj4tYI2g)**. -->
 <!-- - **[October 29, 2025]**: 📊 We have released our benchmark datasets on **[Hugging Face](https://huggingface.co/datasets/lixiaoxi45/DeepAgent-Datasets)**. -->
 - **[October 28, 2025]**: 🔥 We are honored to be featured as Hugging Face **[Daily Paper #1](https://huggingface.co/papers/date/2025-10-27)**.
 - **[October 27, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2510.21618)** and **[Hugging Face](https://huggingface.co/papers/2510.21618)**.
