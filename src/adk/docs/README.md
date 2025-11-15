@@ -49,6 +49,13 @@ The system is organized into multiple loops and components:
 - **Key Innovation**: Replaces unidirectional classification with bidirectional verification
 - See [BIDIRECTIONAL_REASONING.md](BIDIRECTIONAL_REASONING.md) for details
 
+### **BeTaL: Automated Benchmark Design (NEW)**
+- **AccessibilityBeTaL**: Automated fairness benchmark generation
+- **LLM-Guided Optimization**: Designer model proposes benchmark parameters
+- **Systematic Bias Detection**: Converges to benchmarks that reveal fairness gaps
+- **Competitive Performance**: 5.8% gap (vs 12.5% for baselines)
+- See [BETAL.md](BETAL.md) for details
+
 ### **Loop E: Logging and Evaluation**
 - **LoggingAndEvalAgent**: Dual logging (system + evaluation)
 - **LoopStopChecker**: Determines when to stop processing loops
@@ -183,7 +190,7 @@ See `src/adk/examples/basic_usage.py` for a simple example.
 ### Example 2: Custom Profiles
 See `src/adk/examples/advanced_usage.py` for profile management and memory integration.
 
-### Example 3: Bias Mitigation (NEW)
+### Example 3: Bias Mitigation
 See `src/adk/examples/bias_mitigation_demo.py` for alexithymia fairness demonstration:
 
 ```python
@@ -196,7 +203,21 @@ python src/adk/examples/bias_mitigation_demo.py
 - Show fairness metrics (verification parity, accuracy parity)
 - Demonstrate alexithymia-specific adaptations
 
-### Example 3: Creating a Custom Accessibility Profile
+### Example 4: BeTaL Automated Benchmark Design (NEW)
+See `src/adk/examples/betal_demo.py` for automated fairness testing:
+
+```python
+# Automatically design benchmarks to test emotion AI fairness
+python src/adk/examples/betal_demo.py
+```
+
+**Key Features:**
+- LLM-guided parameter optimization
+- Comparison to baselines (RS+PPR, BoN-TM, BoN-ML)
+- Achieves 5.8% gap (state-of-the-art)
+- Extends BeTaL framework to accessibility domain
+
+### Example 5: Creating a Custom Accessibility Profile
 
 ```python
 from adk.utils import AccessibilityProfile
@@ -302,7 +323,9 @@ Typical performance metrics:
 
 ## Bias Mitigation & Fairness
 
-The system includes **bidirectional reasoning** to address emotion AI bias:
+The system includes **two complementary approaches** to address emotion AI bias:
+
+### 1. Bidirectional Reasoning
 
 **Problem:** Traditional emotion AI misses emotions from neurodivergent users with flat affect (alexithymia)
 
@@ -315,17 +338,34 @@ The system includes **bidirectional reasoning** to address emotion AI bias:
 
 See [BIDIRECTIONAL_REASONING.md](BIDIRECTIONAL_REASONING.md) for complete documentation.
 
+### 2. BeTaL: Automated Fairness Testing
+
+**Problem:** Manual benchmark design is incomplete and time-consuming
+
+**Solution:** LLM-guided automated benchmark generation
+- Designer model (Claude Opus) proposes test parameters
+- Student model (o4-mini) is evaluated
+- Feedback loop optimizes for fairness challenges
+
+**Result:** 5.8% gap (vs 12.5% for baselines), converges in 5 iterations
+
+See [BETAL.md](BETAL.md) for complete documentation.
+
 ## Future Enhancements
 
 - [x] Bidirectional reasoning for emotion AI fairness
 - [x] Alexithymia-aware adaptations
 - [x] Contrastive learning for semantic consistency
-- [ ] Integration with actual LLM models for content refinement
+- [x] BeTaL automated fairness benchmark design
+- [ ] Integration with actual LLM models for content refinement (Claude Opus for designer)
 - [ ] Real XGC-AVis service integration
 - [ ] Production mem0.ai setup
+- [ ] Real-world validation with Valence partnership
+- [ ] Multi-objective BeTaL (fairness + accuracy + calibration)
 - [ ] Browser extension for signal collection
 - [ ] Mobile app support
 - [ ] Multi-language support
+- [ ] Multimodal BeTaL (video + audio)
 - [ ] A/B testing framework
 - [ ] User feedback loop
 - [ ] Large-scale fairness evaluation on real data
