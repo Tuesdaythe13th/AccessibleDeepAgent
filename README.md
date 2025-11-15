@@ -685,44 +685,20 @@ If you use AccessibleDeepAgent in your research, please cite:
 ```bibtex
 @software{accessibledeepagent2025,
   title={AccessibleDeepAgent: A Fairness-Focused Multi-Tool Reasoning Agent with Neuroadaptive Accessibility},
-  author={Li, Xiaoxi and DeepAgent Team},
+  author={Tuesday, ARTIFEX Labs},
   year={2025},
   url={https://github.com/Tuesdaythe13th/AccessibleDeepAgent},
   note={Framework for bias-aware AI agents with neuroinclusive accessibility}
 }
 ```
 
-For the bidirectional reasoning component:
-
-```bibtex
-@article{bidirectional_emotion_fairness2025,
-  title={Bidirectional Reasoning for Emotion AI Fairness: Addressing Alexithymia Bias through Verification},
-  author={DeepAgent Team},
-  year={2025},
-  journal={arXiv preprint},
-  note={Implemented in AccessibleDeepAgent}
-}
-```
-
-For the BeTaL fairness testing:
-
-```bibtex
-@article{accessibility_betal2025,
-  title={BeTaL for Accessibility: Automated Fairness Benchmark Design for Emotion AI},
-  author={DeepAgent Team},
-  year={2025},
-  journal={arXiv preprint},
-  note={Extends BeTaL framework to accessibility domain}
-}
 ```
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Copyright (c) 2025 Xiaoxi Li
+This project is licensed under the MIT License
 
 ---
 
@@ -741,7 +717,7 @@ Copyright (c) 2025 Xiaoxi Li
 
 - **Issues**: [GitHub Issues](https://github.com/Tuesdaythe13th/AccessibleDeepAgent/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/Tuesdaythe13th/AccessibleDeepAgent/discussions)
-- **Email**: For sensitive issues or partnership inquiries
+- **Email**: general@artifex.fun
 
 ---
 
@@ -773,4 +749,4 @@ This is a research project under active development. APIs may change, and some f
 
 ---
 
-**Built with fairness and accessibility at the core. Making AI work for everyone.**
+**Built with fairness and accessibility at the core. Innovating on the love of making ai for everyone.**
