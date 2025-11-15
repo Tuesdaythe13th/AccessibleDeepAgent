@@ -160,29 +160,8 @@ Our model inference script can automatically save the model's input and output f
 </details>
 
 
-## 📄 Citation
-
-If you find this work helpful, please cite our paper:
-```bibtex
-@misc{deepagent,
-      title={DeepAgent: A General Reasoning Agent with Scalable Toolsets}, 
-      author={Xiaoxi Li and Wenxiang Jiao and Jiarui Jin and Guanting Dong and Jiajie Jin and Yinuo Wang and Hao Wang and Yutao Zhu and Ji-Rong Wen and Yuan Lu and Zhicheng Dou},
-      year={2025},
-      eprint={2510.21618},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2510.21618}, 
-}
-```
 
 ## 📄 License
 
 This project is released under the [MIT License](LICENSE).
 
-## 📞 Contact
-
-For any questions or feedback, please reach out to us at [xiaoxi_li@ruc.edu.cn](xiaoxi_li@ruc.edu.cn).
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=RUC-NLPIR/DeepAgent&type=Date)](https://www.star-history.com/#RUC-NLPIR/DeepAgent&Date)
