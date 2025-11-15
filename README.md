@@ -1,4 +1,4 @@
-<br>* Neuroadaptive General  Reasoning Agent with Scalable Toolsets for Accessible and Fair Emotion AI</a></h1>
+
 # **AccessibleDeepAgent**
 
 ***
