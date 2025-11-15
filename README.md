@@ -146,7 +146,7 @@ Our model inference script can automatically save the model's input and output f
 
 ## 🔥 Deep Research Agent Family
 
-<details open><summary>Welcome to try our deep research agent series: </summary><p>
+<details open><summary>Welcome to read further about the deep research agent series: </summary><p>
 
 
 > [**DeepAgent: A General Reasoning Agent with Scalable Toolsets (New!)**](https://arxiv.org/abs/2510.21618) <br>
