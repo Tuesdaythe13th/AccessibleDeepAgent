@@ -1,4 +1,4 @@
-<h1 align="center"> <img src="./figures/logo_deepagent.png" width="270" style="vertical-align:middle;"/><br>A* Neuroadaptive General  Reasoning Agent with Scalable Toolsets for Accessible and Fair Emotion AI</a></h1>
+<br>* Neuroadaptive General  Reasoning Agent with Scalable Toolsets for Accessible and Fair Emotion AI</a></h1>
 # **AccessibleDeepAgent**
 
 ***
