@@ -53,6 +53,28 @@ from adk.evaluation import AlexithymiaFairnessMetrics
 \# Training utilities  
 from adk.training import BidirectionalTrainer, AlexithymiaAugmentedDataset
 
+## Repository Components
+
+Here is a concise reference so you can see what’s included and where it lives:
+
+| Component                               | Path                                      | Size                    | Description |
+|-----------------------------------------|-------------------------------------------|-------------------------|-------------|
+| **Bidirectional Reasoning**             | `src/adk/bidirectional_reasoning.py`      | 1 file / 668 LOC        | The 6-layer verification network that pairs forward and reverse decoders to self-check emotion predictions. |
+| **BeTaL (Benchmarking)**                | `src/adk/betal/`                          | 2 files / 690 LOC       | Automated benchmark designer that iteratively searches for fairness gaps and reports them back to the agent. |
+| **Evaluation & Metrics**                | `src/adk/evaluation.py`                   | 1 file / 314 LOC        | Fairness metrics such as FNR parity for alexithymic vs. neurotypical users. |
+| **Training Utilities**                  | `src/adk/training/`                       | 2 files / 423 LOC       | The `BidirectionalTrainer` plus the alexithymia-augmented dataset loader used to fit the core model. |
+| **Neuroadaptive Wrapper**               | `src/adk/neuroadaptive_wrapper.py`        | 1 file / 377 LOC        | Injects fairness-aware logic into the main coordinator so it adapts to users’ cognitive load. |
+| **Loop C (Refinement)**                 | `src/adk/loop_c/`                         | 4 files / 929 LOC       | Meta-agent coordinator and specialist agents (factuality, coherence, etc.) that refine plans. |
+| **Memory / Continuum Memory System**    | `src/adk/tools/memory/`                   | 2 files / 544 LOC       | Integration with mem0.ai for multi-timescale memory. |
+| **Loop B (State)**                      | `src/adk/loop_b/`                         | 2 files / 406 LOC       | Real-time state estimation via components like `StateEstimator` and `XGCAVisClient`. |
+| **Core Orchestration**                  | `src/adk/agents/core/`                    | 3 files / 406 LOC       | Top-level coordinators such as `AccessibilityCoordinator` that run the whole agent stack. |
+| **Examples & Demos**                    | `src/adk/examples/`                       | 4 files / 778 LOC       | Runnable scripts (main demo, bias mitigation demo, BeTaL demo) demonstrating the full pipeline. |
+| **Documentation**                       | `README.md`, `docs/BIDIRECTIONAL_REASONING.md`, `docs/BETAL.md` | 3 files / 1143+ LOC | Deep dives into the bidirectional reasoning module and BeTaL, plus overall guidance. |
+| **Other Modules**                       | Various (`utils/`, `config/`, UI, logging) | 24 files / ~2000 LOC    | Supporting utilities, configuration, UI adaptation, and logging. |
+
+These components collectively form the production-ready neuroadaptive architecture described earlier in the README, where Bidirectional Reasoning and BeTaL serve as the core bias-mitigation innovations, and the loops, memory system, and orchestration modules provide the surrounding agent infrastructure.
+
+
 #### **B. Run Demos**
 
 All demonstrations are available in src/adk/examples/.
