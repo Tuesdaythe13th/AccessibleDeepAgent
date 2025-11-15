@@ -17,6 +17,7 @@ from transformers import AutoTokenizer
 from openai import AsyncOpenAI
 import sys
 sys.path.append('./src')
+from utils.config_validator import validate_and_warn
 from evaluate.evaluate_base import (
     run_evaluation, 
     extract_answer_fn,
@@ -651,6 +652,10 @@ async def main_async():
     args = parse_args()
     with open(args.config_path, 'r', encoding='utf-8') as f:
         config = yaml.safe_load(f)
+
+    # Validate configuration and check for missing/placeholder API keys
+    config = validate_and_warn(config, dataset_name=args.dataset_name)
+
     for k, v in config.items():  # Merge config into args (config values take precedence)
         setattr(args, k, v)
 

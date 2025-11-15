@@ -40,11 +40,18 @@ class FactualityAgent:
             3
         )
 
-        # TODO: Initialize LLM client for fact-checking
-        # In production, would use reasoning model from config
-        self.llm_client = None
+        # Initialize LLM client for fact-checking (optional)
+        # If not configured, will fall back to heuristic-based approach
+        self.llm_client = self._initialize_llm_client()
 
-        self.logger.info(f"FactualityAgent initialized (threshold: {self.threshold})")
+        if self.llm_client:
+            self.logger.info(f"FactualityAgent initialized with LLM client (threshold: {self.threshold})")
+        else:
+            self.logger.warning(
+                f"FactualityAgent initialized in HEURISTIC MODE (no LLM client configured). "
+                f"Using rule-based fact extraction. For production, configure: "
+                f"loop_c.specialist_agents.factuality.llm_api_key and llm_base_url"
+            )
 
     async def refine_content(
         self,
@@ -252,6 +259,79 @@ class FactualityAgent:
         avg_score = sum(c["accuracy_score"] for c in verified_claims) / len(verified_claims)
 
         return avg_score
+
+    def _initialize_llm_client(self) -> Optional[Any]:
+        """
+        Initialize LLM client for fact-checking if configured
+
+        Returns:
+            LLM client instance or None if not configured
+
+        Configuration keys:
+            - loop_c.specialist_agents.factuality.llm_api_key
+            - loop_c.specialist_agents.factuality.llm_base_url
+            - loop_c.specialist_agents.factuality.llm_model (optional)
+        """
+        try:
+            api_key = get_config_value(
+                "loop_c.specialist_agents.factuality.llm_api_key",
+                None
+            )
+            base_url = get_config_value(
+                "loop_c.specialist_agents.factuality.llm_base_url",
+                None
+            )
+
+            # If no API key configured, return None (will use heuristics)
+            if not api_key or not base_url:
+                return None
+
+            # Check if API key is a placeholder
+            placeholder_patterns = ["YOUR_", "REPLACE_", "ENTER_", "xxx"]
+            if any(p in str(api_key).upper() for p in placeholder_patterns):
+                self.logger.warning(
+                    "LLM API key appears to be a placeholder. "
+                    "Using heuristic mode."
+                )
+                return None
+
+            # Try to import and initialize OpenAI client
+            try:
+                from openai import AsyncOpenAI
+
+                model = get_config_value(
+                    "loop_c.specialist_agents.factuality.llm_model",
+                    "gpt-4"
+                )
+
+                client = AsyncOpenAI(
+                    api_key=api_key,
+                    base_url=base_url
+                )
+
+                # Store model name for later use
+                self.llm_model = model
+
+                self.logger.info(
+                    f"Successfully initialized LLM client for factuality checking "
+                    f"(model: {model})"
+                )
+
+                return client
+
+            except ImportError:
+                self.logger.warning(
+                    "OpenAI package not available. Install with: pip install openai. "
+                    "Using heuristic mode."
+                )
+                return None
+
+        except Exception as e:
+            self.logger.error(
+                f"Error initializing LLM client: {e}. "
+                "Falling back to heuristic mode."
+            )
+            return None
 
     async def batch_refine(
         self,
