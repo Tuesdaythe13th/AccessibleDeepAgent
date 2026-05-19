@@ -44,6 +44,11 @@ class AccessibilityCoordinator:
         self.current_session_id: Optional[str] = None
         self.session_start_time: Optional[datetime] = None
 
+        # Timeout configurations (in seconds)
+        self.perception_timeout = self.config.get("perception_timeout", 10.0)
+        self.adaptation_timeout = self.config.get("adaptation_timeout", 15.0)
+        self.logging_timeout = self.config.get("logging_timeout", 5.0)
+
         self.logger.info("AccessibilityCoordinator initialized")
 
     async def initialize(self):
@@ -100,20 +105,50 @@ class AccessibilityCoordinator:
 
         interaction_start = datetime.now()
 
-        # Step 1: Perception Pipeline (Loops A & B)
-        normalized_signals, cognitive_state = await self.perception_pipeline.process_signals(
-            raw_signals,
-            context
-        )
+        # Step 1: Perception Pipeline (Loops A & B) with timeout protection
+        try:
+            normalized_signals, cognitive_state = await asyncio.wait_for(
+                self.perception_pipeline.process_signals(raw_signals, context),
+                timeout=self.perception_timeout
+            )
+        except asyncio.TimeoutError:
+            self.logger.error(
+                f"Perception pipeline timeout after {self.perception_timeout}s. "
+                "Using fallback cognitive state."
+            )
+            # Return a fallback cognitive state
+            from ...utils.schemas import CognitiveState
+            cognitive_state = CognitiveState(
+                cognitive_load=0.5,
+                attention_level=0.5,
+                fatigue_index=0.5,
+                stress_level=0.5,
+                reading_comprehension=0.5,
+                confidence=0.0  # Low confidence for fallback
+            )
+            normalized_signals = []
 
-        # Step 2: Accessibility Policy Loop (Loop C, UI Adaptation, CMS)
-        adaptations_result = await self.accessibility_policy_loop.generate_and_apply_adaptations(
-            cognitive_state,
-            user_id,
-            self.current_session_id,
-            content_to_refine,
-            context
-        )
+        # Step 2: Accessibility Policy Loop (Loop C, UI Adaptation, CMS) with timeout protection
+        try:
+            adaptations_result = await asyncio.wait_for(
+                self.accessibility_policy_loop.generate_and_apply_adaptations(
+                    cognitive_state,
+                    user_id,
+                    self.current_session_id,
+                    content_to_refine,
+                    context
+                ),
+                timeout=self.adaptation_timeout
+            )
+        except asyncio.TimeoutError:
+            self.logger.error(
+                f"Adaptation generation timeout after {self.adaptation_timeout}s. "
+                "Using empty adaptations."
+            )
+            adaptations_result = {
+                "ui_adaptations": [],
+                "content_refinement": {"iterations_completed": 0}
+            }
 
         # Step 3: Calculate metrics and log (Loop E)
         interaction_time = (datetime.now() - interaction_start).total_seconds() * 1000
@@ -127,10 +162,20 @@ class AccessibilityCoordinator:
             successful_adaptations=len(adaptations_result["ui_adaptations"])
         )
 
-        await self.logging_eval_agent.log_evaluation_metrics(
-            self.current_session_id,
-            metrics
-        )
+        # Log metrics with timeout protection (non-blocking if fails)
+        try:
+            await asyncio.wait_for(
+                self.logging_eval_agent.log_evaluation_metrics(
+                    self.current_session_id,
+                    metrics
+                ),
+                timeout=self.logging_timeout
+            )
+        except asyncio.TimeoutError:
+            self.logger.warning(
+                f"Logging timeout after {self.logging_timeout}s. "
+                "Metrics not logged but continuing."
+            )
 
         # Compile result
         result = {

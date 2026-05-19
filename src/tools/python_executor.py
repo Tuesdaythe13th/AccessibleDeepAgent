@@ -1,3 +1,26 @@
+"""
+Python Code Executor with Security Constraints
+
+This module provides sandboxed Python code execution with the following security measures:
+
+Security Features:
+- Pattern-based filtering of dangerous imports and functions
+- Timeout protection (default 10s, configurable)
+- Prohibited operations: file I/O, network access, subprocess spawning, etc.
+- Restricted built-ins: no eval, exec, __import__, compile in user code
+
+Limitations:
+- Pattern matching can potentially be bypassed with obfuscation
+- No CPU/memory resource limits (relies on timeout only)
+- Execution happens in same process (not containerized)
+
+Production Recommendations:
+- Use containerized execution (Docker, gVisor) for true isolation
+- Add resource limits (CPU, memory) via cgroups or container constraints
+- Consider alternatives like RestrictedPython or pyodide for stronger sandboxing
+- Monitor execution patterns for anomalies
+"""
+
 import os
 import io
 import regex
@@ -17,6 +40,7 @@ from scipy import optimize
 
 
 class UnsafeCodeError(Exception):
+    """Raised when potentially unsafe code patterns are detected"""
     pass
 
 UNSAFE_PATTERNS = [
@@ -27,6 +51,31 @@ UNSAFE_PATTERNS = [
     r'(?<!\w)(input|eval|exec|exit|quit|__import__)\s*\(',
     # Prohibit dangerous os functions (in case os is somehow imported)
     r'os\.(system|popen|fork|kill|remove|rmdir)',
+    # Additional security patterns
+    # Prohibit compile and code object manipulation
+    r'(?<!\w)(compile|code|memoryview)\s*\(',
+    # Prohibit access to internals and builtins manipulation
+    r'__builtins__|__loader__|__spec__|__cached__',
+    r'globals\s*\(|locals\s*\(|vars\s*\(|dir\s*\(',
+    # Prohibit file operations
+    r'(?<!\w)(open|file)\s*\(',
+    r'\.read\(|\.write\(|\.readlines\(|\.writelines\(',
+    # Prohibit dangerous module access patterns
+    r'importlib|pkgutil|imp\.',
+    # Prohibit socket and network operations
+    r'import\s+socket|from\s+socket\s+import',
+    r'import\s+urllib|import\s+requests|import\s+http',
+    # Prohibit pickle and serialization (can execute arbitrary code)
+    r'import\s+pickle|from\s+pickle\s+import',
+    r'\.loads?\(|\.dumps?\(',
+    # Prohibit getattr/setattr/delattr for bypassing restrictions
+    r'(?<!\w)(getattr|setattr|delattr|hasattr)\s*\(',
+    # Prohibit accessing protected attributes (double underscore)
+    r'\.__[a-zA-Z_]+__',
+    # Prohibit shell-like operations
+    r'`[^`]+`',  # Backtick execution
+    # Prohibit environment variable access
+    r'os\.environ|os\.getenv',
 ]
 
 

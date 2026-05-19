@@ -46,7 +46,17 @@ class MemoryManager:
         self.long_term_days = get_config_value("cms.retention_policy.long_term_days", 90)
         self.aggregate_threshold = get_config_value("cms.retention_policy.aggregate_threshold", 10)
 
-        self.logger.info("MemoryManager initialized")
+        # Automatic cleanup configuration
+        self.auto_cleanup_enabled = get_config_value("cms.auto_cleanup.enabled", True)
+        self.auto_cleanup_interval_hours = get_config_value("cms.auto_cleanup.interval_hours", 24)
+
+        # Background task for automatic cleanup
+        self._cleanup_task: Optional[asyncio.Task] = None
+
+        self.logger.info(
+            f"MemoryManager initialized (auto_cleanup: {self.auto_cleanup_enabled}, "
+            f"interval: {self.auto_cleanup_interval_hours}h)"
+        )
 
     async def save_user_preference(
         self,
@@ -424,6 +434,90 @@ class MemoryManager:
         self.logger.info(f"Memory cleanup completed. Removed {deleted} records.")
         return deleted
 
+    async def start_auto_cleanup(self):
+        """
+        Start automatic cleanup background task
+
+        This task runs periodically to clean up expired memories based on
+        the configured interval. The task can be stopped with stop_auto_cleanup().
+        """
+        if not self.auto_cleanup_enabled:
+            self.logger.info("Automatic cleanup is disabled in configuration")
+            return
+
+        if self._cleanup_task and not self._cleanup_task.done():
+            self.logger.warning("Automatic cleanup task is already running")
+            return
+
+        self.logger.info(
+            f"Starting automatic memory cleanup task "
+            f"(interval: {self.auto_cleanup_interval_hours} hours)"
+        )
+
+        self._cleanup_task = asyncio.create_task(self._auto_cleanup_loop())
+
+    async def stop_auto_cleanup(self):
+        """
+        Stop the automatic cleanup background task
+
+        Gracefully cancels the cleanup task if it's running.
+        """
+        if self._cleanup_task and not self._cleanup_task.done():
+            self.logger.info("Stopping automatic memory cleanup task")
+            self._cleanup_task.cancel()
+            try:
+                await self._cleanup_task
+            except asyncio.CancelledError:
+                self.logger.info("Automatic cleanup task stopped")
+            self._cleanup_task = None
+        else:
+            self.logger.info("No automatic cleanup task is running")
+
+    async def _auto_cleanup_loop(self):
+        """
+        Internal loop for automatic cleanup
+
+        Runs cleanup at configured intervals until cancelled.
+        """
+        interval_seconds = self.auto_cleanup_interval_hours * 3600
+
+        while True:
+            try:
+                # Wait for the configured interval
+                await asyncio.sleep(interval_seconds)
+
+                # Run cleanup
+                self.logger.debug("Running scheduled memory cleanup")
+                try:
+                    deleted = await self.cleanup()
+                    self.logger.info(
+                        f"Scheduled cleanup completed. Removed {deleted} records."
+                    )
+                except Exception as e:
+                    self.logger.error(
+                        f"Error during scheduled cleanup: {e}. "
+                        "Will retry at next interval."
+                    )
+
+            except asyncio.CancelledError:
+                self.logger.info("Automatic cleanup loop cancelled")
+                raise
+            except Exception as e:
+                self.logger.error(
+                    f"Unexpected error in cleanup loop: {e}. "
+                    "Continuing to next interval."
+                )
+                # Don't crash the loop on unexpected errors
+
     async def get_statistics(self) -> Dict[str, Any]:
         """Get memory statistics"""
-        return await self.memory_store.get_statistics()
+        stats = await self.memory_store.get_statistics()
+
+        # Add cleanup task status
+        stats["auto_cleanup"] = {
+            "enabled": self.auto_cleanup_enabled,
+            "interval_hours": self.auto_cleanup_interval_hours,
+            "task_running": self._cleanup_task is not None and not self._cleanup_task.done()
+        }
+
+        return stats
