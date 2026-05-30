@@ -5,7 +5,7 @@ from tool_search import ToolRetriever
 from func_timeout import func_set_timeout, FunctionTimedOut
 import re
 import asyncio
-from fuzzywuzzy import process
+from rapidfuzz import process
 
 
 def read_toolhop_file(file_path):

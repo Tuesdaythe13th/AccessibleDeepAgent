@@ -195,7 +195,7 @@ class VisualAccessibilityAgent:
 
         contrast_ratio = (lighter + 0.05) / (darker + 0.05)
 
-        # WCAG 2.1 Standards
+        # WCAG 2.2 Standards
         # Large text: >= 18pt or >= 14pt bold
         is_large_text = text_size >= 18.0
 

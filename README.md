@@ -9,23 +9,28 @@ AccessibleDeepAgent is a complete, production-ready accessibility toolkit addres
 
 ---
 
-## 🎯 What's New: Expanded Accessibility Features
+## News
+
+- **[Jan 14, 2026]**: DeepAgent has been accepted by **[WWW 2026](https://www2026.thewebconf.org/index.html)**!
+- **[Oct 28, 2025]**: We are honored to be featured as Hugging Face **[Daily Paper #1](https://huggingface.co/papers/date/2025-10-27)**.
+- **[Oct 27, 2025]**: Our paper is now available on **[arXiv](https://arxiv.org/abs/2510.21618)** and **[Hugging Face](https://huggingface.co/papers/2510.21618)**.
+- **[Oct 27, 2025]**: Our codebase released. You can now deploy DeepAgent with reasoning models like [QwQ](https://huggingface.co/collections/Qwen/qwq), [Qwen3](https://huggingface.co/collections/Qwen/qwen3) and your own toolsets.
+
+---
+
+## What's New: Expanded Accessibility Features
 
 We've dramatically expanded AccessibleDeepAgent with **5 new comprehensive accessibility modules** addressing ALL major accessibility challenges in generative AI:
 
-### 🆕 New Accessibility Agents
+### New Accessibility Agents
 
 1. **VisualAccessibilityAgent** - Alt text, color contrast, screen readers, color blindness
 2. **CognitiveAccessibilityAgent** - Text simplification, reading levels, summaries, cognitive load
 3. **ContentBiasDetector** - Bias detection, inclusive language, fairness analysis
 4. **MultimodalOutputAgent** - TTS, audio descriptions, structured formats, Braille
 5. **NeurodiversitySupportAgent** - Autism, ADHD, dyslexia, sensory support
-- **[Jan 14, 2026]**: 🎉 DeepAgent has been accepted by **[WWW 2026](https://www2026.thewebconf.org/index.html)**!
-- **[Oct 28, 2025]**: 🔥 We are honored to be featured as Hugging Face **[Daily Paper #1](https://huggingface.co/papers/date/2025-10-27)**.
-- **[Oct 27, 2025]**: 📄 Our paper is now available on **[arXiv](https://arxiv.org/abs/2510.21618)** and **[Hugging Face](https://huggingface.co/papers/2510.21618)**.
-- **[Oct 27, 2025]**: 🚀 Our codebase released. You can now deploy DeepAgent with reasoning models like [QwQ](https://huggingface.co/collections/Qwen/qwq), [Qwen3](https://huggingface.co/collections/Qwen/qwen3) and your own toolsets.
 
-### 📓 Complete Demo Notebook
+### Complete Demo Notebook
 
 Try all features instantly in our [**Accessibility Features Demo Notebook**](accessibility_features_demo.ipynb) - works in Google Colab, Jupyter, and any environment!
 
@@ -44,7 +49,10 @@ Try all features instantly in our [**Accessibility Features Demo Notebook**](acc
 - [DeepAgent Framework](#deepagent-framework)
 - [ADK: Neuroadaptive Accessibility](#adk-neuroadaptive-accessibility)
 - [Fairness & Bias Mitigation](#fairness--bias-mitigation)
+- [Troubleshooting](#troubleshooting)
 - [Documentation](#documentation)
+- [Related Papers](#related-papers)
+- [Use Cases](#use-cases)
 - [Contributing](#contributing)
 - [Citation](#citation)
 - [License](#license)
@@ -63,64 +71,69 @@ AccessibleDeepAgent serves three primary purposes:
 
 ### What Makes This Different?
 
-✅ **Complete Coverage** - Addresses ALL major accessibility challenges
-✅ **Production-Ready** - Fully tested, documented, ready for integration
-✅ **Platform-Agnostic** - Works with any AI model or platform
-✅ **Demonstrable** - Complete Jupyter notebook with real examples
-✅ **Research-Backed** - Built on accessibility research and WCAG standards
-✅ **Modular** - Use just what you need, or integrate everything
+- **Complete Coverage** - Addresses ALL major accessibility challenges
+- **Production-Ready** - Fully tested, documented, ready for integration
+- **Platform-Agnostic** - Works with any AI model or platform
+- **Demonstrable** - Complete Jupyter notebook with real examples
+- **Research-Backed** - Built on accessibility research and WCAG 2.2 standards
+- **Modular** - Use just what you need, or integrate everything
 
 ---
 
 ## Top Accessibility Challenges Addressed
 
-### 1. **Visual Barriers** 🎨
-- ❌ **Problem**: AI-generated images lack alt text
-- ✅ **Solution**: Automated alt text generation with quality scoring (3 detail levels)
-- ❌ **Problem**: Poor color contrast in AI outputs
-- ✅ **Solution**: Real-time WCAG AA/AAA contrast checking
-- ❌ **Problem**: Color-blind users can't distinguish AI visualizations
-- ✅ **Solution**: Color blindness simulation for 4 types (protanopia, deuteranopia, tritanopia, achromatopsia)
+### 1. Visual Barriers
 
-### 2. **Cognitive Barriers** 🧠
-- ❌ **Problem**: Complex language excludes users with cognitive disabilities
-- ✅ **Solution**: Automatic text simplification to target reading levels
-- ❌ **Problem**: Information overload from lengthy AI responses
-- ✅ **Solution**: Smart summarization (brief, medium, detailed) and chunking
-- ❌ **Problem**: No way to assess content complexity
-- ✅ **Solution**: Reading level analysis (Flesch-Kincaid) and cognitive load prediction
+- **Problem**: AI-generated images lack alt text
+- **Solution**: Automated alt text generation with quality scoring (3 detail levels)
+- **Problem**: Poor color contrast in AI outputs
+- **Solution**: Real-time WCAG AA/AAA contrast checking
+- **Problem**: Color-blind users can't distinguish AI visualizations
+- **Solution**: Color blindness simulation for 4 types (protanopia, deuteranopia, tritanopia, achromatopsia)
 
-### 3. **Bias and Fairness** ⚖️
-- ❌ **Problem**: AI perpetuates gender and demographic bias
-- ✅ **Solution**: Real-time bias detection with inclusive alternatives (50+ terms)
-- ❌ **Problem**: Emotion AI discriminates against alexithymic users
-- ✅ **Solution**: Bidirectional verification (40% false negative reduction)
-- ❌ **Problem**: Stereotypical associations in AI outputs
-- ✅ **Solution**: Pattern matching for stereotypes with recommendations
+### 2. Cognitive Barriers
 
-### 4. **Multi-Modal Access** 🎙️
-- ❌ **Problem**: Content only available in one format
-- ✅ **Solution**: Export to TTS (with SSML), audio descriptions, JSON/XML/Markdown, Braille
-- ❌ **Problem**: Screen readers struggle with AI-generated content
-- ✅ **Solution**: Optimization and semantic structure analysis
-- ❌ **Problem**: No print-friendly formats
-- ✅ **Solution**: Dyslexia-friendly formatting with spacing and font recommendations
+- **Problem**: Complex language excludes users with cognitive disabilities
+- **Solution**: Automatic text simplification to target reading levels
+- **Problem**: Information overload from lengthy AI responses
+- **Solution**: Smart summarization (brief, medium, detailed) and chunking
+- **Problem**: No way to assess content complexity
+- **Solution**: Reading level analysis (Flesch-Kincaid) and cognitive load prediction
 
-### 5. **Neurodiversity** 🧩
-- ❌ **Problem**: Idioms and ambiguity confuse autistic users
-- ✅ **Solution**: Literal language conversion and explicit structure
-- ❌ **Problem**: Long text blocks overwhelm ADHD users
-- ✅ **Solution**: Chunking with focus aids and time estimates
-- ❌ **Problem**: Complex text is hard for dyslexic users
-- ✅ **Solution**: Font recommendations, spacing optimization, formatting guides
-- ❌ **Problem**: Sensory overload from animations/colors
-- ✅ **Solution**: Risk assessment and mitigation strategies
+### 3. Bias and Fairness
+
+- **Problem**: AI perpetuates gender and demographic bias
+- **Solution**: Real-time bias detection with inclusive alternatives (50+ terms)
+- **Problem**: Emotion AI discriminates against alexithymic users
+- **Solution**: Bidirectional verification (40% false negative reduction)
+- **Problem**: Stereotypical associations in AI outputs
+- **Solution**: Pattern matching for stereotypes with recommendations
+
+### 4. Multi-Modal Access
+
+- **Problem**: Content only available in one format
+- **Solution**: Export to TTS (with SSML), audio descriptions, JSON/XML/Markdown, Braille
+- **Problem**: Screen readers struggle with AI-generated content
+- **Solution**: Optimization and semantic structure analysis
+- **Problem**: No print-friendly formats
+- **Solution**: Dyslexia-friendly formatting with spacing and font recommendations
+
+### 5. Neurodiversity
+
+- **Problem**: Idioms and ambiguity confuse autistic users
+- **Solution**: Literal language conversion and explicit structure
+- **Problem**: Long text blocks overwhelm ADHD users
+- **Solution**: Chunking with focus aids and time estimates
+- **Problem**: Complex text is hard for dyslexic users
+- **Solution**: Font recommendations, spacing optimization, formatting guides
+- **Problem**: Sensory overload from animations/colors
+- **Solution**: Risk assessment and mitigation strategies
 
 ---
 
 ## Key Features
 
-### 🎨 Visual Accessibility Agent
+### Visual Accessibility Agent
 
 ```python
 from adk.agents.visual_accessibility_agent import VisualAccessibilityAgent
@@ -157,12 +170,12 @@ sr_check = await visual_agent.optimize_for_screen_reader(
 
 **Features:**
 - Alt text generation (brief, medium, detailed) with quality scoring
-- WCAG 2.1 AA/AAA color contrast verification
+- WCAG 2.2 AA/AAA color contrast verification
 - Color blindness simulation (4 types)
 - Screen reader compatibility analysis
 - Visual complexity assessment
 
-### 🧠 Cognitive Accessibility Agent
+### Cognitive Accessibility Agent
 
 ```python
 from adk.agents.cognitive_accessibility_agent import CognitiveAccessibilityAgent
@@ -208,7 +221,7 @@ chunks = await cognitive_agent.chunk_content(text, chunk_size=200)
 - Progressive disclosure chunking
 - Plain language conversion
 
-### ⚖️ Content Bias Detector
+### Content Bias Detector
 
 ```python
 from adk.agents.content_bias_detector import ContentBiasDetector
@@ -238,7 +251,7 @@ report = await bias_detector.generate_bias_report(content)
 - Representation analysis
 - Comprehensive bias reports with grades
 
-### 🎙️ Multi-Modal Output Agent
+### Multi-Modal Output Agent
 
 ```python
 from adk.agents.multimodal_output_agent import MultimodalOutputAgent
@@ -284,7 +297,7 @@ braille = await multimodal_agent.generate_braille_ready(text, grade=2)
 - Print-friendly formatting (dyslexia-optimized)
 - Braille-ready text preparation
 
-### 🧩 Neurodiversity Support Agent
+### Neurodiversity Support Agent
 
 ```python
 from adk.agents.neurodiversity_support_agent import NeurodiversitySupportAgent
@@ -331,11 +344,11 @@ ef_support = await neurodiversity_agent.provide_executive_function_support(
 
 ## Quick Start
 
-### 🚀 Try in Google Colab (Fastest)
+### Try in Google Colab (Fastest)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tuesdaythe13th/AccessibleDeepAgent/blob/main/accessibility_features_demo.ipynb)
 
-### 💻 Local Installation
+### Local Installation
 
 ```bash
 # Clone repository
@@ -349,17 +362,19 @@ pip install -r requirements.txt
 jupyter notebook accessibility_features_demo.ipynb
 ```
 
-### 🎯 Quick Example
+### Quick Example
 
 ```python
 from adk.agents.visual_accessibility_agent import VisualAccessibilityAgent
 from adk.agents.cognitive_accessibility_agent import CognitiveAccessibilityAgent
 from adk.agents.content_bias_detector import ContentBiasDetector
+from adk.agents.multimodal_output_agent import MultimodalOutputAgent
 
 # Initialize agents
 visual_agent = VisualAccessibilityAgent()
 cognitive_agent = CognitiveAccessibilityAgent()
 bias_detector = ContentBiasDetector()
+multimodal_agent = MultimodalOutputAgent()
 
 # Make your AI output accessible
 ai_output = "Your AI-generated content here..."
@@ -367,14 +382,6 @@ ai_output = "Your AI-generated content here..."
 # Check reading level
 reading = await cognitive_agent.analyze_reading_level(ai_output)
 print(f"Reading level: Grade {reading['grade_level']}")
-| Model | Size | Type | Link |
-|-------|------|------|---------|
-| Qwen3-4B-Thinking | 4B | Thinking | [🤗 HuggingFace](https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507) |
-| Qwen3-8B | 8B | Hybrid | [🤗 HuggingFace](https://huggingface.co/Qwen/Qwen3-8B) |
-| Qwen3-30B-A3B-Thinking | 30B | Thinking | [🤗 HuggingFace](https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507) |
-| QwQ-32B | 32B | Thinking | [🤗 HuggingFace](https://huggingface.co/Qwen/QwQ-32B) |
-| DeepAgent-QwQ-32B | 32B | Thinking | [🤗 HuggingFace](https://huggingface.co/lixiaoxi45/DeepAgent-QwQ-32B) |
-| Qwen3-235B-A22B-Thinking | 235B | Thinking | [🤗 HuggingFace](https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507) |
 
 # Simplify if needed
 if reading['grade_level'] > 8:
@@ -401,7 +408,7 @@ print(f"Ready for screen readers: {tts['ssml']}")
 
 ### Requirements
 
-- Python 3.8+
+- Python 3.10+
 - pydantic
 - torch (optional, for emotion classification)
 - numpy (optional, for advanced features)
@@ -441,11 +448,11 @@ pip install -r requirements-adk.txt
 
 See the complete [**accessibility_features_demo.ipynb**](accessibility_features_demo.ipynb) for:
 
-- ✅ 40+ working code examples
-- ✅ All features demonstrated end-to-end
-- ✅ Google Colab compatible
-- ✅ Copy-paste ready for your projects
-- ✅ Detailed explanations and best practices
+- 40+ working code examples
+- All features demonstrated end-to-end
+- Google Colab compatible
+- Copy-paste ready for your projects
+- Detailed explanations and best practices
 
 ---
 
@@ -467,7 +474,7 @@ AccessibleDeepAgent/
 │   ├── bidirectional_reasoning.py         # Emotion AI fairness
 │   ├── neuroadaptive_wrapper.py           # Complete integration
 │   └── utils/                             # Shared utilities
-├── accessibility_features_demo.ipynb       # 🆕 Complete demo
+├── accessibility_features_demo.ipynb       # Complete demo
 └── src/                                   # DeepAgent framework
 ```
 
@@ -554,17 +561,28 @@ async def make_accessible(content: str, features: List[str]):
 
 AccessibleDeepAgent also includes a research-grade multi-tool reasoning agent for benchmark evaluation.
 
+### Supported Models
+
+| Model | Size | Type | Link |
+|-------|------|------|---------|
+| Qwen3-4B-Thinking | 4B | Thinking | [HuggingFace](https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507) |
+| Qwen3-8B | 8B | Hybrid | [HuggingFace](https://huggingface.co/Qwen/Qwen3-8B) |
+| Qwen3-30B-A3B-Thinking | 30B | Thinking | [HuggingFace](https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507) |
+| QwQ-32B | 32B | Thinking | [HuggingFace](https://huggingface.co/Qwen/QwQ-32B) |
+| DeepAgent-QwQ-32B | 32B | Thinking | [HuggingFace](https://huggingface.co/lixiaoxi45/DeepAgent-QwQ-32B) |
+| Qwen3-235B-A22B-Thinking | 235B | Thinking | [HuggingFace](https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507) |
+
 ### Supported Benchmarks
 
 | Benchmark | Type | Status |
 |-----------|------|--------|
-| **ToolBench** | Tool use | ✅ Supported |
-| **GAIA** | QA with tools | ✅ Supported |
-| **API-Bank** | API calling | ✅ Supported |
-| **RestBench** | REST API use | ✅ Supported |
-| **ToolHop** | Multi-hop tool use | ✅ Supported |
-| **ALFWorld** | Embodied tasks | ✅ Supported |
-| **WebShop** | Web navigation | ✅ Supported |
+| **ToolBench** | Tool use | Supported |
+| **GAIA** | QA with tools | Supported |
+| **API-Bank** | API calling | Supported |
+| **RestBench** | REST API use | Supported |
+| **ToolHop** | Multi-hop tool use | Supported |
+| **ALFWorld** | Embodied tasks | Supported |
+| **WebShop** | Web navigation | Supported |
 
 ### Quick Start
 
@@ -591,7 +609,7 @@ The ADK (Accessibility Development Kit) provides real-time neuroadaptive accessi
 - **Cognitive State Estimation**: Load, attention, fatigue, stress, comprehension
 - **Bidirectional Reasoning**: 40% FNR reduction for alexithymic users
 - **BeTaL Testing**: Automated fairness benchmark generation (5.8% gap vs 12.5% baseline)
-- **Memory System**: Persistent profiles with mem0.ai
+- **Memory System**: Persistent profiles with mem0 v2.0 (token-efficient hierarchical extraction)
 - **UI Adaptation**: Dynamic accessibility adjustments
 
 ### Quick Start
@@ -634,27 +652,30 @@ asyncio.run(main())
 **Solution**: Bidirectional verification instead of unidirectional classification
 
 ```
-Audio → Encoder → Emotion → Decoder → Reconstructed Audio
-  ↓                                        ↓
-Embedding 1 ←── Contrastive Loss ──→ Embedding 2
+Audio -> Encoder -> Emotion -> Decoder -> Reconstructed Audio
+  |                                        |
+Embedding 1 <-- Contrastive Loss --> Embedding 2
 ```
 
 **Result**: 40% reduction in false negative rate
 
 ### BeTaL: Automated Fairness Testing
-### Troubleshooting multi tool failures
-
-If DeepAgent looks stuck, keeps choosing strange tools, or ignores tool outputs when you run ToolBench or other multi tool benchmarks, see `docs/multi_tool_agent_failure_modes.md` for a step by step checklist.
-
-### Evaluation
 
 LLM-guided benchmark generation achieving 5.8% fairness gap (vs 12.5% baseline)
 
 ```
-Designer LLM → proposes scenarios
-Student LLM → evaluated on fairness
-Feedback Loop → optimizes for gaps
+Designer LLM -> proposes scenarios
+Student LLM -> evaluated on fairness
+Feedback Loop -> optimizes for gaps
 ```
+
+---
+
+## Troubleshooting
+
+### Multi-tool Failures
+
+If DeepAgent looks stuck, keeps choosing strange tools, or ignores tool outputs when you run ToolBench or other multi-tool benchmarks, see `docs/multi_tool_agent_failure_modes.md` for a step-by-step checklist.
 
 ---
 
@@ -662,7 +683,7 @@ Feedback Loop → optimizes for gaps
 
 ### Core Documentation
 
-- **🆕 Accessibility Demo**: [accessibility_features_demo.ipynb](accessibility_features_demo.ipynb) - Complete feature showcase
+- **Accessibility Demo**: [accessibility_features_demo.ipynb](accessibility_features_demo.ipynb) - Complete feature showcase
 - **Main README**: [README.md](README.md) - This file
 - **ADK Docs**: [src/adk/docs/README.md](src/adk/docs/README.md)
 - **Bidirectional Reasoning**: [src/adk/docs/BIDIRECTIONAL_REASONING.md](src/adk/docs/BIDIRECTIONAL_REASONING.md)
@@ -670,25 +691,32 @@ Feedback Loop → optimizes for gaps
 
 ### Standards Compliance
 
-- ✅ WCAG 2.1 AA/AAA
-- ✅ Federal Plain Language Guidelines
-- ✅ Person-First Language Standards
-- ✅ Section 508 Accessibility
-- ✅ Flesch-Kincaid Readability
+- WCAG 2.2 AA/AAA (ISO/IEC 40500:2026)
+- WCAG 3.0 Working Draft (March 2026) - forward-looking compliance
+- Federal Plain Language Guidelines
+- Person-First Language Standards
+- Section 508 Accessibility
+- Flesch-Kincaid Readability
+
+---
+
+## Related Papers
+
 > [**DeepAgent: A General Reasoning Agent with Scalable Toolsets (WWW 2026)**](https://arxiv.org/abs/2510.21618) <br>
 > **TLDR:** An end-to-end deep reasoning agent that performs autonomous thinking, tool discovery, and action execution with brain-inspired memory folding mechanism. <br>
 [![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/DeepAgent) [![github](https://img.shields.io/github/stars/RUC-NLPIR/DeepAgent.svg?style=social)](https://github.com/RUC-NLPIR/DeepAgent) [![arXiv](https://img.shields.io/badge/Arxiv-2510.21618-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2510.21618) [![Paper](https://img.shields.io/badge/Hugging%20Face-Paper-yellow?logo=huggingface)](https://huggingface.co/papers/2510.21618) [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FXiaoxiLi0111%2Fstatus%2F1982649697467859438)](https://x.com/XiaoxiLi0111/status/1982649697467859438)
 
 > [**Agentic Entropy-Balanced Policy Optimization (WWW 2026)**](https://arxiv.org/abs/2510.14545) <br>
 > **TLDR:** An agentic RL algorithm designed to balance entropy in both the rollout and policy update phases. <br>
-[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [![arXiv](https://img.shields.io/badge/Arxiv-2510.14545-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2510.14545) [![Paper](https://img.shields.io/badge/Hugging%20Face-Paper-yellow?logo=huggingface)](https://huggingface.co/papers/2510.14545) [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FKevin_GuoweiXu%2Fstatus%2F1858338565463421244)]()
+[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [![arXiv](https://img.shields.io/badge/Arxiv-2510.14545-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2510.14545) [![Paper](https://img.shields.io/badge/Hugging%20Face-Paper-yellow?logo=huggingface)](https://huggingface.co/papers/2510.14545)
+
+> [**Agentic Reinforced Policy Optimization (ICLR 2026)**](https://arxiv.org/abs/2507.19849) <br>
+> **TLDR:** An agentic RL algorithm that encourages the policy model to adaptively branch sampling during high-entropy tool-call rounds. <br>
+[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [![arXiv](https://img.shields.io/badge/Arxiv-2507.19849-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2507.19849) [![Paper](https://img.shields.io/badge/Hugging%20Face-Paper-yellow?logo=huggingface)](https://huggingface.co/papers/2507.19849) [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FKevin_GuoweiXu%2Fstatus%2F1858338565463421244)](https://x.com/_akhaliq/status/1950172418250547478)
 
 ---
 
 ## Use Cases
-> [**Agentic Reinforced Policy Optimization (ICLR 2026)**](https://arxiv.org/abs/2507.19849) <br>
-> **TLDR:** An agentic RL algorithm encourage the policy model to adaptively branch sampling during high-entropy tool-call rounds, <br>
-[![github](https://img.shields.io/badge/-Github-black?logo=github)](https://github.com/RUC-NLPIR/ARPO) [![github](https://img.shields.io/github/stars/RUC-NLPIR/ARPO.svg?style=social)](https://github.com/RUC-NLPIR/ARPO) [![arXiv](https://img.shields.io/badge/Arxiv-2507.19849-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2507.19849) [![Paper](https://img.shields.io/badge/Hugging%20Face-Paper-yellow?logo=huggingface)](https://huggingface.co/papers/2507.19849) [![X (formerly Twitter) URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FKevin_GuoweiXu%2Fstatus%2F1858338565463421244)](https://x.com/_akhaliq/status/1950172418250547478)
 
 1. **AI Content Generators** - Ensure all generated content is accessible
 2. **Chatbots & Assistants** - Adapt responses based on user profiles
@@ -717,10 +745,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## Citation
 
 ```bibtex
-@software{accessibledeepagent2025,
+@software{accessibledeepagent2026,
   title={AccessibleDeepAgent: Comprehensive Accessibility Framework for Generative AI},
   author={Tuesday, ARTIFEX Labs},
-  year={2025},
+  year={2026},
   url={https://github.com/Tuesdaythe13th/AccessibleDeepAgent},
   note={Production-ready accessibility toolkit with fairness-focused AI agents}
 }
@@ -737,10 +765,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## Acknowledgments
 
 - **Humane Intelligence Accessibility Bias Bounty** - Motivating force
-- **WCAG & W3C** - Accessibility standards
+- **WCAG & W3C** - Accessibility standards (WCAG 2.2, WCAG 3.0 Working Draft)
 - **Plain Language Community** - Guidelines and best practices
 - **Neurodiversity Advocates** - User-centered design insights
-- **mem0.ai** - Memory system infrastructure
+- **mem0.ai** - Memory system infrastructure (v2.0 token-efficient algorithm)
 - **OpenAI, Anthropic** - LLM providers
 
 ---
@@ -755,16 +783,17 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Project Status
 
-🚀 **Active Development** | ⭐ **Production-Ready Accessibility Features**
+**Active Development** | **Production-Ready Accessibility Features**
 
 ### Recent Updates
 
-- ✅ **NEW**: 5 comprehensive accessibility agents (Visual, Cognitive, Bias, Multi-Modal, Neurodiversity)
-- ✅ **NEW**: Complete Jupyter demo notebook with 40+ examples
-- ✅ **NEW**: Platform-agnostic integration guides
-- ✅ Bidirectional reasoning for emotion AI fairness
-- ✅ BeTaL automated fairness testing
-- ✅ Multi-benchmark evaluation harness
+- 5 comprehensive accessibility agents (Visual, Cognitive, Bias, Multi-Modal, Neurodiversity)
+- Complete Jupyter demo notebook with 40+ examples
+- Platform-agnostic integration guides
+- Bidirectional reasoning for emotion AI fairness
+- BeTaL automated fairness testing
+- Multi-benchmark evaluation harness
+- Dependencies updated to 2026 state-of-the-art (Transformers v5, PyTorch 2.12, mem0 v2.0)
 
 ### Roadmap
 
@@ -774,9 +803,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - [ ] A/B testing framework
 - [ ] Extended benchmark coverage
 - [ ] User feedback integration
+- [ ] WCAG 3.0 compliance (when finalized)
 
 ---
 
-**Making Generative AI Accessible to Everyone** ♿️
+**Making Generative AI Accessible to Everyone**
 
 Built with accessibility at the core. Production-ready. Platform-agnostic. Open source.
