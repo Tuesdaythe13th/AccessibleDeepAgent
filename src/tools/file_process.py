@@ -3,7 +3,7 @@ import os
 import json
 import zipfile
 import pandas as pd
-import PyPDF2
+from pypdf import PdfReader
 from pptx import Presentation
 from docx import Document
 import io
@@ -185,7 +185,7 @@ class FileProcessor:
             file_path = os.path.join(self.base_dir, file_name)
             text_content = []
             with open(file_path, 'rb') as f:
-                pdf_reader = PyPDF2.PdfReader(f)
+                pdf_reader = PdfReader(f)
                 text_content.append(f"PDF file with {len(pdf_reader.pages)} pages:")
                 
                 max_pages = 3
